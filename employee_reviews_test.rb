@@ -48,4 +48,11 @@ class EmployeeReviewsTest < Minitest::Test
     e.review = "John Smith is lagging behind on work. His sales are down for each quarter and he needs to be fired!"
     assert_equal "John Smith is lagging behind on work. His sales are down for each quarter and he needs to be fired!", e.review
   end
+
+  def test_set_employee_performance
+    e = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
+    e.performance = "Satisfactory"
+    assert_equal "Satisfactory", e.performance
+  end
+
 end
