@@ -51,8 +51,8 @@ class EmployeeReviewsTest < Minitest::Test
 
   def test_set_employee_performance
     e = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
-    e.performance = "Satisfactory"
-    assert_equal "Satisfactory", e.performance
+    e.set_performance(false)
+    assert_equal "Unsatisfactory", e.performance
   end
 
 end
