@@ -42,4 +42,10 @@ class EmployeeReviewsTest < Minitest::Test
     bigmoney = d.get_total_salaries(d)
     assert_equal 655000, bigmoney
   end
+
+  def test_add_employee_review
+    e = Employee.new("John Smith", "Johnsmith@aol.com", "555-5555", 100000)
+    e.review = "John Smith is lagging behind on work. His sales are down for each quarter and he needs to be fired!"
+    assert_equal "John Smith is lagging behind on work. His sales are down for each quarter and he needs to be fired!", e.review
+  end
 end
