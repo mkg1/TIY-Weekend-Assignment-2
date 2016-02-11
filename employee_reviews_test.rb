@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 
-require './employees.rb'
+require './department.rb'
 
 class EmployeeReviewsTest < Minitest::Test
   def test_classes_exist
@@ -22,5 +22,12 @@ class EmployeeReviewsTest < Minitest::Test
     assert_equal "Johnsmith@aol.com", e.email
     assert_equal "555-5555", e.phone
     assert_equal 100000, e.salary
+  end
+
+  def test_employee_can_be_added_to_department
+    d = Department.new("Marketing")
+    e = Employee.new("John Smith", "Johnsmith@aol.com", "555-5555", 100000)
+    d.add_employee(e)
+    assert_equal e, employees[0]
   end
 end
