@@ -21,7 +21,7 @@ class EmployeeReviewsTest < Minitest::Test
     assert_equal "John Smith", e.name
     assert_equal "Johnsmith@aol.com", e.email
     assert_equal "555-5555", e.phone
-    assert_equal 100000, e.salary
+    assert_equal 100000, e.starting_salary
   end
 
   def test_employee_can_be_added_to_department
@@ -55,4 +55,8 @@ class EmployeeReviewsTest < Minitest::Test
     assert_equal "Unsatisfactory", e.performance
   end
 
+  def test_give_employee_raise
+    e = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
+    assert_equal 100300, e.give_raise(300)
+  end
 end

@@ -14,7 +14,7 @@ class Department
     d = department
     salaries = 0
     d.employees.each do |i|
-      salaries = salaries + i.salary
+      salaries = salaries + i.starting_salary
     end
     return salaries
   end

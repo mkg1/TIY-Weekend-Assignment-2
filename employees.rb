@@ -1,11 +1,11 @@
 class Employee
-  attr_reader :name, :email, :phone, :salary, :performance
+  attr_reader :name, :email, :phone, :starting_salary, :performance
   attr_accessor :review
-  def initialize(name, email, phone, salary, review = nil, performance = nil)
+  def initialize(name, email, phone, starting_salary, review = nil, performance = nil)
     @name = name
     @email = email
     @phone = phone
-    @salary = salary
+    @starting_salary = starting_salary
     @review = review
     @performance = performance
   end
@@ -16,5 +16,9 @@ class Employee
     else
       @performance = "Unsatisfactory"
     end
+  end
+
+  def give_raise(raise_amount)
+    @starting_salary += raise_amount
   end
 end
