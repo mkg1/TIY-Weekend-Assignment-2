@@ -12,7 +12,7 @@ class EmployeeReviewsTest < Minitest::Test
   def test_department_can_be_created
     d = Department.new("Marketing")
     assert d
-    assert_equal "Marketing", d.department
+    assert_equal "Marketing", d.dept_name
   end
 
   def test_employee_can_be_created
@@ -58,5 +58,20 @@ class EmployeeReviewsTest < Minitest::Test
   def test_give_employee_raise
     e = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
     assert_equal 100300, e.give_raise(300)
+  end
+
+  def test_give_department_raise
+    d = Department.new("Marketing")
+    e1 = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
+    e2 = Employee.new("Joe Smith", "Johnsmith@aol.com", "555-5555", 55000)
+    e3 = Employee.new("Jane Smith", "Johnsmith@aol.com", "555-5555", 500000)
+    d.add_employee(e1)
+    d.add_employee(e2)
+    d.add_employee(e3)
+    e1.set_performance(true)
+    e2.set_performance(false)
+    e3.set_performance(true)
+    d.give_department_raise(50000)
+    assert_equal 525000, e3.starting_salary
   end
 end
