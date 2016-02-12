@@ -69,9 +69,24 @@ class EmployeeReviewsTest < Minitest::Test
     d.add_employee(e2)
     d.add_employee(e3)
     e1.set_performance(true)
-    e2.set_performance(false)
+    e2.set_performance(true)
     e3.set_performance(true)
     d.give_department_raise(50000)
-    assert_equal 525000, e3.starting_salary
+    assert_equal 71666, e2.starting_salary
+  end
+
+  def test_block_form
+    d = Department.new("Marketing")
+    e1 = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
+    e2 = Employee.new(first_name: "Joe", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 55000)
+    e3 = Employee.new(first_name: "Jane", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 500000)
+    d.add_employee(e1)
+    d.add_employee(e2)
+    d.add_employee(e3)
+    e1.set_performance(true)
+    e2.set_performance(true)
+    e3.set_performance(true)
+    d.give_department_raise(50000) {|e| e.performance == "Satisfactory" && e.starting_salary < 56000}
+    assert_equal 105000, e2.starting_salary
   end
 end

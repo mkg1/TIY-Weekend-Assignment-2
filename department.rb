@@ -20,10 +20,15 @@ class Department
   end
 
   def give_department_raise(dept_raise)
-    up_for_raise = employees.select {|i| i.performance == "Satisfactory"}
-    length = up_for_raise.length
+    if block_given?
+      up_for_raise = @employees.select {|j| yield(j) }
+    else
+      up_for_raise = @employees
+    end
     up_for_raise.each do |x|
-      x.starting_salary += (dept_raise / length)
+      x.starting_salary += (dept_raise / up_for_raise.length)
     end
   end
+
+
 end
