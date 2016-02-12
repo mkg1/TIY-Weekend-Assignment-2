@@ -20,33 +20,11 @@ class Department
   end
 
   def give_department_raise(dept_raise)
-    up_for_raise = []
-    employees.each do |p|
-      if p.performance == "Satisfactory"
-        up_for_raise << p
-      end
-    end
+    up_for_raise = employees.select {|i| i.performance == "Satisfactory"}
     length = up_for_raise.length
     up_for_raise.each do |x|
       x.starting_salary += (dept_raise / length)
     end
+    puts up_for_raise[0].starting_salary
   end
 end
-
-
-# employees.each do |i|
-#   array << i.performance
-#   # if i.performance == "Satisfactory"
-#   #   i.starting_salary += amount/length
-#   #   return
-#   # end
-# end
-# puts array
-#
-# exemplary = employees.select {|i| i.performance == "Satisfactory"}
-# length = exemplary.length
-# exemplary.each do |x|
-#   print exemplary[x].starting_salary
-# end
-# puts exemplary[0].starting_salary
-# puts exemplary[1].starting_salary
