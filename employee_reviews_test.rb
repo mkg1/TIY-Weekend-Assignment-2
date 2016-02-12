@@ -16,7 +16,7 @@ class EmployeeReviewsTest < Minitest::Test
   end
 
   def test_employee_can_be_created
-    e = Employee.new("John Smith", "Johnsmith@aol.com", "555-5555", 100000)
+    e = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
     assert e
     assert_equal "John Smith", e.name
     assert_equal "Johnsmith@aol.com", e.email
@@ -26,16 +26,16 @@ class EmployeeReviewsTest < Minitest::Test
 
   def test_employee_can_be_added_to_department
     d = Department.new("Marketing")
-    e = Employee.new("John Smith", "Johnsmith@aol.com", "555-5555", 100000)
+    e = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
     d.add_employee(e)
     assert_equal e, d.employees[0]
   end
 
   def test_get_total_department_salaries
     d = Department.new("Marketing")
-    e1 = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
-    e2 = Employee.new("Joe Smith", "Johnsmith@aol.com", "555-5555", 55000)
-    e3 = Employee.new("Jane Smith", "Johnsmith@aol.com", "555-5555", 500000)
+    e1 = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
+    e2 = Employee.new(first_name: "Joe", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 55000)
+    e3 = Employee.new(first_name: "Jane", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 500000)
     d.add_employee(e1)
     d.add_employee(e2)
     d.add_employee(e3)
@@ -44,27 +44,27 @@ class EmployeeReviewsTest < Minitest::Test
   end
 
   def test_add_employee_review
-    e = Employee.new("John Smith", "Johnsmith@aol.com", "555-5555", 100000)
+    e = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
     e.review = "John Smith is lagging behind on work. His sales are down for each quarter and he needs to be fired!"
     assert_equal "John Smith is lagging behind on work. His sales are down for each quarter and he needs to be fired!", e.review
   end
 
   def test_set_employee_performance
-    e = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
+    e = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
     e.set_performance(false)
     assert_equal "Unsatisfactory", e.performance
   end
 
   def test_give_employee_raise
-    e = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
+    e = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
     assert_equal 100300, e.give_raise(300)
   end
 
   def test_give_department_raise
     d = Department.new("Marketing")
-    e1 = Employee.new("John Doe", "Johnsmith@aol.com", "555-5555", 100000)
-    e2 = Employee.new("Joe Smith", "Johnsmith@aol.com", "555-5555", 55000)
-    e3 = Employee.new("Jane Smith", "Johnsmith@aol.com", "555-5555", 500000)
+    e1 = Employee.new(first_name: "John", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
+    e2 = Employee.new(first_name: "Joe", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 55000)
+    e3 = Employee.new(first_name: "Jane", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 500000)
     d.add_employee(e1)
     d.add_employee(e2)
     d.add_employee(e3)

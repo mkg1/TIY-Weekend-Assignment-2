@@ -25,6 +25,5 @@ class Department
     up_for_raise.each do |x|
       x.starting_salary += (dept_raise / length)
     end
-    puts up_for_raise[0].starting_salary
   end
 end
