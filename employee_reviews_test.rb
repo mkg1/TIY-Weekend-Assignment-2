@@ -89,4 +89,10 @@ class EmployeeReviewsTest < Minitest::Test
     d.give_department_raise(50000) {|e| e.performance == "Satisfactory" && e.starting_salary < 56000}
     assert_equal 105000, e2.starting_salary
   end
+
+  def test_employee_review_positive_vs_negative_counts
+    e1 = Employee.new(first_name: "Zeke", last_name: "Smith", email: "Johnsmith@aol.com", phone: "555-5555", starting_salary: 100000)
+    e1.employee_review_status
+    assert_equal "Unsatisfactory", e1.performance
+  end
 end
