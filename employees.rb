@@ -22,13 +22,14 @@ class Employee
     @starting_salary += raise_amount
   end
 
-  def employee_review_status
-    @review = "Zeke is a very positive person and encourages those around him, but he has not done well technically this year.  There are two areas in which Zeke has room for improvement.  First, when communicating verbally (and sometimes in writing), he has a tendency to use more words than are required.  This conversational style does put people at ease, which is valuable, but it often makes the meaning difficult to isolate, and can cause confusion."
-  #  @reviews.select {|n| (n.match(/\b#{name}\b/i)) ? (n = name.review) : false}
-    positives = [/positive/, /encourages/]
-    negatives = [/difficult/, /confusion/, /technically/, /improvement/]
+  def employee_review_status(review)
+    @review = review
+    positives = [/positive/i, /encourag\S+/i, /valuable/i, /\bconsistent\S*/i, /\bimpress\S*/i, /\beffectiv(\b|\S*)/i, /asset/i, /willing\S*/i, /\bsuccess(\b|\S*)/i, /\brespons\S*/i]
+    negatives = [/negative/i, /difficult/i, /improvement/i, /\bconfus\S+/i, /\bconsequen\S+/i, /inadequate\S*/i, /\bconcern\S+/i, /\S+rupt\S*/i, /(not |in)consistent\S*/i, ]
     positive_reviews = positives.count{ |s| /\b#{s}\b/ =~ @review }
+    puts positive_reviews
     negative_reviews = negatives.count{ |s| /\b#{s}\b/ =~ @review }
+    puts negative_reviews
     if negative_reviews < positive_reviews
       @performance = "Satisfactory"
     elsif positive_reviews < negative_reviews
