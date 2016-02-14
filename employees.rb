@@ -27,12 +27,14 @@ class Employee
     positives = [/positive/i, /encourag\S+/i, /valuable/i, /\bconsistent\S*/i, /\bimpress\S*/i, /\beffectiv(\b|\S*)/i, /asset/i, /willing\S*/i, /\bsuccess(\b|\S*)/i, /\brespons\S*/i]
     negatives = [/negative/i, /difficult/i, /improvement/i, /\bconfus\S+/i, /\bconsequen\S+/i, /inadequate\S*/i, /\bconcern\S+/i, /\S+rupt\S*/i, /(not |in)consistent\S*/i, ]
     positive_reviews = positives.count{ |s| /\b#{s}\b/ =~ @review }
-    puts positive_reviews
     negative_reviews = negatives.count{ |s| /\b#{s}\b/ =~ @review }
-    puts negative_reviews
-    if negative_reviews < positive_reviews
+    positive_percentage_score = ((positive_reviews.to_f/(positive_reviews+negative_reviews))*100).round
+    puts positive_percentage_score
+    if positive_percentage_score >= 75
       @performance = "Satisfactory"
-    elsif positive_reviews < negative_reviews
+    elsif positive_percentage_score >= 50
+      @performance = "Good"
+    elsif positive_percentage_score < 50
       @performance = "Unsatisfactory"
     end
   end
