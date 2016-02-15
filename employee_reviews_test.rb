@@ -23,6 +23,10 @@ class EmployeeReviewsTest < Minitest::Test
     "Wanda has been an incredibly consistent and effective developer.  Clients are always satisfied with her work, developers are impressed with her productivity, and she's more than willing to help others even when she has a substantial workload of her own.  She is a great asset to Awesome Company, and everyone enjoys working with her.  During the past year, she has largely been devoted to work with the Cement Company, and she is the perfect woman for the job.  We know that work on a single project can become monotonous, however, so over the next few months, we hope to spread some of the Cement Company work to others.  This will also allow Wanda to pair more with others and spread her effectiveness to other projects."
   end
 
+  private def test_good_review
+    "Molly is positive negative encouraging difficult valuable less than expected asset concerning"
+  end
+
   def test_classes_exist
     assert Employee
     assert Department
@@ -122,5 +126,32 @@ class EmployeeReviewsTest < Minitest::Test
     assert_equal "Unsatisfactory", e2.performance
     assert_equal "Satisfactory", e3.performance
     assert_equal "Satisfactory", e4.performance
+  end
+
+  def test_score_based_department_raise
+    d = Department.new("Marketing")
+    e1 = Employee.new(first_name: "Zeke", last_name: "Smith", email: "zekesmith@aol.com", phone: "555-5555", starting_salary: 100000)
+    e2 = Employee.new(first_name: "Yvonne", last_name: "Richards", email: "yr@aol.com", phone: "555-5555", starting_salary: 55000)
+    e3 = Employee.new(first_name: "Wanda", last_name: "Sutton", email: "ws@aol.com", phone: "555-5555", starting_salary: 500000)
+    e4 = Employee.new(first_name: "Xavier", last_name: "Holt", email: "zh@aol.com", phone: "555-5555", starting_salary: 55000)
+    e5 = Employee.new(first_name: "Molly", last_name: "Gehring", email: "mg@aol.com", phone: "555-5555", starting_salary: 42000)
+    e1.employee_review_status(zeke_review)
+    e2.employee_review_status(yvonne_review)
+    e3.employee_review_status(wanda_review)
+    e4.employee_review_status(xavier_review)
+    e5.employee_review_status(test_good_review)
+    d.add_employee(e1)
+    d.add_employee(e2)
+    d.add_employee(e3)
+    d.add_employee(e4)
+    d.add_employee(e5)
+    d.give_department_raise(50000) {|e| (e.performance == "Satisfactory" || e.performance =="Good") && e.starting_salary < 56000}
+    assert_equal "Unsatisfactory", e1.performance
+    assert_equal "Unsatisfactory", e2.performance
+    assert_equal "Satisfactory", e3.performance
+    assert_equal "Satisfactory", e4.performance
+    assert_equal "Good", e5.performance
+    assert_equal 80000, e4.starting_salary
+    assert_equal 54500, e5.starting_salary
   end
 end

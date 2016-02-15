@@ -26,9 +26,11 @@ class Department
       up_for_raise = @employees
     end
     up_for_raise.each do |x|
-      x.starting_salary += (dept_raise / up_for_raise.length)
+      if x.performance == "Good"
+        x.starting_salary += 0.5*(dept_raise / up_for_raise.length)
+      elsif x.performance == "Satisfactory"
+        x.starting_salary += (dept_raise / up_for_raise.length)
+      end
     end
   end
-
-
 end
